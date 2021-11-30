@@ -16,13 +16,57 @@ public class Player {
   }
   
    public void move() {
+     if (canMove())
     pos.add(vel);
   }
+    public boolean canMove() {
+   boolean canMove;
+   PVector newPos = PVector.add(pos,vel);
+   if (newPos.y < maze.MARGIN ||  newPos.y + SIZE > maze.size.y+ maze.MARGIN || newPos.x < maze.MARGIN){
+     canMove = false;
+    }
+    else {
+      canMove = true;
+    }
+    return canMove;
+  }
   
+   public void collides(Coin c) {
+    double dist = PVector.sub(this.pos,c.pos).mag();
+    if (dist <= this.SIZE / 2 + c.SIZE / 2) {
+      score++;
+      c.active = false;
+      System.out.println("Score: "+score);
+    }
+  }
+    public void collides(Exit e) {
+    if (this.pos.x >= e.pos.x && score >=10) { // && = and 
+      textAlign(CENTER,CENTER);
+      textSize(48);
+      text("YOU WIN!",width/2,height/2);
+      noLoop();
+    }
+  }
+   public void collides(Trap t) {
+    double dist = PVector.sub(this.pos,t.pos).mag();
+    if (dist <= this.SIZE / 2 + t.SIZE / 2) {
+      hp--;
+      t.active = false;
+      System.out.println("Health: "+hp);
+      if (hp <= 0) {
+        youLose();
+      }
+    }
+  }
   
-  
-  
-  
+  private void youLose() {
+    textAlign(CENTER,CENTER);
+    textSize(48);
+    text("Game Over",width/2,height/2);
+    pos = new PVector(50,height/2);
+    noLoop();
+
+  }
   
   
   
