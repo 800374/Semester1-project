@@ -30,7 +30,27 @@ public class Player {
     }
     return canMove;
   }
+   public void collides(Spider s) {
+    double dist = PVector.sub(this.pos,s.pos).mag();
+    if (dist <= this.SIZE / 2 + s.SIZE / 2) {
+      hp--;
+      if (hp <= 0) {
+        youLose();
+      }
+      System.out.println("HP: "+hp);
+    }
+  }
   
+   /*public void collides(Skeleton sk) {
+    double dist = PVector.sub(this.pos,sk.pos).mag();
+    if (dist <= this.SIZE / 2 + sk.SIZE / 2) {
+      hp--;
+      if (hp <= 0) {
+        youLose();
+      }
+      System.out.println("HP: "+hp);
+    }
+  }*/
    public void collides(Coin c) {
     double dist = PVector.sub(this.pos,c.pos).mag();
     if (dist <= this.SIZE / 2 + c.SIZE / 2) {
@@ -40,10 +60,11 @@ public class Player {
     }
   }
     public void collides(Exit e) {
-    if (this.pos.x >= e.pos.x && score >=10) { // && = and 
+    if (this.pos.x >= e.pos.x) { // && = and 
       textAlign(CENTER,CENTER);
       textSize(48);
       text("YOU WIN!",width/2,height/2);
+      System.out.println("You collected: " +score + " points");
       noLoop();
     }
   }
