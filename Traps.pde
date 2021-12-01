@@ -8,7 +8,7 @@ public class Trap {
   }
   
   public void show() {
-    fill(100,84,0);
+    fill(192,192,192);
     circle(pos.x,pos.y,SIZE);
   }
 }
