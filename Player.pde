@@ -1,7 +1,7 @@
 public class Player {
   private PVector pos, vel;
-  private int hp, score;
-  private final int SPEED = 5, SIZE = 20;
+  private int hp, score, SPEED = 5;
+  private final int SIZE = 20;
   
   public Player(int x, int y) {
     hp = 100;
@@ -30,7 +30,27 @@ public class Player {
     }
     return canMove;
   }
+   public void collides(Spider s) {
+    double dist = PVector.sub(this.pos,s.pos).mag();
+    if (dist <= this.SIZE / 2 + s.SIZE / 2) {
+      hp--;
+      if (hp <= 0) {
+        youLose();
+      }
+      System.out.println("HP: "+hp);
+    }
+  }
   
+   /*public void collides(Skeleton sk) {
+    double dist = PVector.sub(this.pos,sk.pos).mag();
+    if (dist <= this.SIZE / 2 + sk.SIZE / 2) {
+      hp--;
+      if (hp <= 0) {
+        youLose();
+      }
+      System.out.println("HP: "+hp);
+    }
+  }*/
    public void collides(Coin c) {
     double dist = PVector.sub(this.pos,c.pos).mag();
     if (dist <= this.SIZE / 2 + c.SIZE / 2) {
@@ -38,12 +58,21 @@ public class Player {
       c.active = false;
       System.out.println("Score: "+score);
     }
+  } 
+  public void collides(Powerup p) {
+    double dist = PVector.sub(this.pos,p.pos).mag();
+    if (dist <= this.SIZE / 2 + p.SIZE / 2) {
+      SPEED++;
+      p.active = false;
+      System.out.println("You got a little faster");
+    }
   }
     public void collides(Exit e) {
-    if (this.pos.x >= e.pos.x && score >=10) { // && = and 
+    if (this.pos.x >= e.pos.x) { // && = and 
       textAlign(CENTER,CENTER);
       textSize(48);
       text("YOU WIN!",width/2,height/2);
+      System.out.println("You collected: " +score + " points");
       noLoop();
     }
   }

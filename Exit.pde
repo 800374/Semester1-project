@@ -1,8 +1,9 @@
 public class Exit {
   private PVector pos, size;
   
-  public Exit(){
-    
+  public Exit( int gameWidth, int gameHeight) {
+    size = new PVector(50,gameHeight);
+    pos = new PVector(gameWidth-size.x, 0);
   }
   
   public void show() {
