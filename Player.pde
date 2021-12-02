@@ -41,7 +41,7 @@ public class Player {
     }
   }
   
-   /*public void collides(Skeleton sk) {
+   public void collides(Skeleton sk) {
     double dist = PVector.sub(this.pos,sk.pos).mag();
     if (dist <= this.SIZE / 2 + sk.SIZE / 2) {
       hp--;
@@ -50,7 +50,8 @@ public class Player {
       }
       System.out.println("HP: "+hp);
     }
-  }*/
+  }
+  
    public void collides(Coin c) {
     double dist = PVector.sub(this.pos,c.pos).mag();
     if (dist <= this.SIZE / 2 + c.SIZE / 2) {
@@ -91,6 +92,7 @@ public class Player {
   private void youLose() {
     textAlign(CENTER,CENTER);
     textSize(48);
+    fill(225,0,0);
     text("Game Over",width/2,height/2);
     pos = new PVector(50,height/2);
     noLoop();
