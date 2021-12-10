@@ -2,6 +2,8 @@ Player player;
 Coin[] coins = new Coin [10];
 Trap[] traps = new Trap [5];
 Spider[] sp = new Spider [3];
+Skeleton [] sk = new Skeleton [3];
+Powerup[] p = new Powerup [2];
 Exit exit;
 Maze maze;
 
@@ -13,6 +15,9 @@ public void setup() {
   spawnTraps();
   spawnCoins();
   spawnSpider();
+  spawnPowerup();
+  spawnSkeleton();
+  //wall[0] = new Wall(30,420,310,5);
 }
 
 public void draw() {
@@ -27,9 +32,22 @@ public void draw() {
     sp[i].show();    
     //sp[i].move();
   }
+  for (int i = 0; i < sk.length; i++) {
+    player.collides(sp[i]);
+    sk[i].show();    
+    //sk[i].move();
+  }
+  
     for (int i = 0; i < traps.length; i++) {
     traps[i].show();
     player.collides(traps[i]);
+  }
+  
+  for (int i = 0; i < p.length; i++) {
+    if (p[i].active == false)
+      continue;
+    p[i].show();
+    player.collides(p[i]);
   }
   
    for (int i = 0; i < coins.length; i++) {
@@ -83,5 +101,15 @@ private void spawnTraps() {
 private void spawnSpider() {
   for (int i = 0; i < sp.length; i++) {
     sp[i] = new Spider((int)(Math.random()*maze.size.x + maze.MARGIN),(int)(Math.random()*maze.size.y + maze.MARGIN));
+  }
+}
+private void spawnSkeleton() {
+  for (int i = 0; i < sk.length; i++) {
+    sk[i] = new Skeleton((int)(Math.random()*maze.size.x + maze.MARGIN),(int)(Math.random()*maze.size.y + maze.MARGIN));
+  }
+}
+private void spawnPowerup() {
+  for (int i = 0; i < p.length; i++) {
+    p[i] = new Powerup((int)(Math.random()*maze.size.x + maze.MARGIN),(int)(Math.random()*maze.size.y + maze.MARGIN));
   }
 }
