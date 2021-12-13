@@ -1,6 +1,6 @@
 public class Player {
   private PVector pos, vel;
-  private int hp, score, SPEED = 5;
+  private int hp, score, SPEED = 1;
   private final int SIZE = 20;
   
   public Player(int x, int y) {
@@ -18,6 +18,8 @@ public class Player {
    public void move() {
      if (canMove())
     pos.add(vel);
+    System.out.println(pos.y);
+    System.out.print(pos.x);
   }
     public boolean canMove() {
    boolean canMove;
@@ -35,22 +37,23 @@ public class Player {
     if (dist <= this.SIZE / 2 + s.SIZE / 2) {
       hp--;
       if (hp <= 0) {
-        youLose();
+        //youLose();
       }
       System.out.println("HP: "+hp);
     }
   }
   
-   /*public void collides(Skeleton sk) {
+   public void collides(Skeleton sk) {
     double dist = PVector.sub(this.pos,sk.pos).mag();
     if (dist <= this.SIZE / 2 + sk.SIZE / 2) {
       hp--;
       if (hp <= 0) {
-        youLose();
+        //youLose();
       }
       System.out.println("HP: "+hp);
     }
-  }*/
+  }
+  
    public void collides(Coin c) {
     double dist = PVector.sub(this.pos,c.pos).mag();
     if (dist <= this.SIZE / 2 + c.SIZE / 2) {
@@ -62,7 +65,7 @@ public class Player {
   public void collides(Powerup p) {
     double dist = PVector.sub(this.pos,p.pos).mag();
     if (dist <= this.SIZE / 2 + p.SIZE / 2) {
-      SPEED++;
+      //SPEED++;
       p.active = false;
       System.out.println("You got a little faster");
     }
@@ -73,7 +76,7 @@ public class Player {
       textSize(48);
       text("YOU WIN!",width/2,height/2);
       System.out.println("You collected: " +score + " points");
-      noLoop();
+      //noLoop();
     }
   }
    public void collides(Trap t) {
@@ -83,19 +86,20 @@ public class Player {
       t.active = false;
       System.out.println("Health: "+hp);
       if (hp <= 0) {
-        youLose();
+        //youLose();
       }
     }
   }
   
-  private void youLose() {
+  /*private void youLose() {
     textAlign(CENTER,CENTER);
     textSize(48);
+    fill(225,0,0);
     text("Game Over",width/2,height/2);
     pos = new PVector(50,height/2);
     noLoop();
 
-  }
+  }*/
   
   
   
