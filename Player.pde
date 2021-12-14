@@ -48,7 +48,7 @@ public class Player {
     if (dist <= this.SIZE / 2 + sk.SIZE / 2) {
       hp--;
       if (hp <= 0) {
-        //youLose();
+        youLose();
       }
       System.out.println("HP: "+hp);
     }
@@ -71,7 +71,7 @@ public class Player {
   public void collides(Powerup p) {
     double dist = PVector.sub(this.pos,p.pos).mag();
     if (dist <= this.SIZE / 2 + p.SIZE / 2) {
-      //SPEED++;
+      SPEED++;
       p.active = false;
       System.out.println("You got a little faster");
     }
@@ -82,7 +82,7 @@ public class Player {
       textSize(48);
       text("YOU WIN!",width/2,height/2);
       System.out.println("You collected: " +score + " points");
-      //noLoop();
+      noLoop();
     }
   }
    public void collides(Trap t) {
@@ -92,19 +92,19 @@ public class Player {
       t.active = false;
       System.out.println("Health: "+hp);
       if (hp <= 0) {
-        //youLose();
+        youLose();
       }
     }
   }
   
-  /*private void youLose() {
+  private void youLose() {
     textAlign(CENTER,CENTER);
     textSize(48);
     fill(225,0,0);
     text("Game Over",width/2,height/2);
     pos = new PVector(50,height/2);
     noLoop();
-  }*/
+  }
   
   
   
